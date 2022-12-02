@@ -25,8 +25,9 @@ contract EtherBank is ReentrancyGuard {
         console.log("Attacker balance: ", balances[msg.sender]);
         console.log("");
 
-        payable(msg.sender).sendValue(balances[msg.sender]);
+        uint accountBalance = balances[msg.sender];
         balances[msg.sender] = 0;
+        payable(msg.sender).sendValue(accountBalance);
     }
 
     // check the total balance of the EtherBank contract
